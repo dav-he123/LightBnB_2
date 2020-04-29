@@ -1,8 +1,15 @@
-DROP TABLE IF EXISTS properties CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS property_reviews CASCADE;
+DROP TABLE IF EXISTS properties CASCADE;
 DROP TABLE IF EXISTS reservations CASCADE;
+DROP TABLE IF EXISTS property_reviews CASCADE;
 
+CREATE TABLE users(
+  id SERIAL PRIMARY KEY NOT NULL,
+  name varchar(255) NOT NULL,
+  email varchar(255) NOT NULL,
+  password varchar(255) NOT NULL
+
+);
 
 CREATE TABLE properties (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -23,26 +30,7 @@ CREATE TABLE properties (
   post_code varchar(255) NOT NULL,
   
   active BOOLEAN NOT NULL DEFAULT TRUE,
-  owner_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
-
-);
-
-CREATE TABLE users(
-  id SERIAL PRIMARY KEY NOT NULL,
-  name varchar(255) NOT NULL,
-  email varchar(255) NOT NULL,
-  password varchar(255) NOT NULL
-
-);
-
-CREATE TABLE property_reviews(
-  id SERIAL PRIMARY KEY NOT NULL,
-  message TEXT NOT NULL,
-  rating INTEGER NOT NULL DEFAULT 0,
-
-  guest_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  reservation_id INTEGER REFERENCES reservations(id) ON DELETE CASCADE,
-  property_id INTEGER REFERENCES properties(id) ON DELETE CASCADE
+  owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 
 );
 
@@ -54,6 +42,17 @@ CREATE TABLE reservations(
 
   property_id INTEGER REFERENCES properties(id) ON DELETE CASCADE,
   guest_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+
+);
+
+CREATE TABLE property_reviews(
+  id SERIAL PRIMARY KEY NOT NULL,
+  message TEXT NOT NULL,
+  rating INTEGER NOT NULL DEFAULT 0,
+
+  guest_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  reservation_id INTEGER REFERENCES reservations(id) ON DELETE CASCADE,
+  property_id INTEGER REFERENCES properties(id) ON DELETE CASCADE
 
 );
 

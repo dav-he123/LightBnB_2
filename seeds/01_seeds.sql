@@ -12,11 +12,11 @@ VALUES (1, 'House', 'description', '1200px-Toronto_Raptors_logo.svg.png', 'photo
 INSERT INTO reservations (start_date, end_date, property_id, guest_id) 
 VALUES ('2018-09-11', '2018-09-26', 2, 3),
 ('2019-01-04', '2019-02-01', 2, 2),
-('2021-10-01', '2021-10-14', 2, 4);
+('2021-10-01', '2021-10-14', 2, 1);
 
 
 INSERT INTO property_reviews (message, rating, guest_id, property_id, reservation_id)
-VALUES ('message', 1, 1, 2, 118),
-('message', 2, 2, 2, 119),
-('message', 3, 3, 3, 120);
+VALUES ('message', 1, 1, 2, 1),
+('message', 2, 2, 2, 2),
+('message', 3, 3, 3, 3);
 
